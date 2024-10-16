@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <title>Insight360</title>
+  <style>
+  /* Barra de rolagem (scrollbar) personalizada para o body */
+body {
+    overflow-y: scroll;
+    height: 100%;
+}
+
+/* Estilo da barra de rolagem vertical */
+body::-webkit-scrollbar {
+    width: 12px; /* Largura da barra de rolagem */
+}
+
+/* Fundo da barra de rolagem */
+body::-webkit-scrollbar-track {
+    background-color: #0f0b0bb9; /* Cor de fundo da track da barra de rolagem */
+}
+
+/* Barra de rolagem (scroll thumb) */
+body::-webkit-scrollbar-thumb {
+    background-color: #363333; /* Cor azul da barra de rolagem */
+    border-radius: 6px; /* Arredondamento da barra */
+}
+
+/* Efeito ao passar o mouse sobre a barra de rolagem */
+body::-webkit-scrollbar-thumb:hover {
+    background-color: #070606cb; /* Cor azul mais escuro ao passar o mouse */
+}
+
+/* Barra lateral de navegação */
+.sidebar {
+    background-color: #000000; /* Cor azul para a barra lateral */
+    width: 250px; /* Largura da barra lateral */
+    height: 100vh; /* Altura total da tela */
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto; /* Permite rolagem vertical na barra lateral */
+    overflow-x: hidden; /* Oculta a rolagem horizontal */
+    padding-top: 20px;
+    transition: 0.3s; /* Transição suave */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5); /* Sombra para efeito 3D */
+}
+
+/* Estilo da barra de rolagem da barra lateral */
+.sidebar::-webkit-scrollbar {
+    width: 8px; /* Largura da barra de rolagem da barra lateral */
+}
+
+/* Fundo da barra de rolagem da barra lateral */
+.sidebar::-webkit-scrollbar-track {
+    background-color: #0a0707; /* Cor de fundo da track na barra lateral */
+}
+
+/* Barra de rolagem (scroll thumb) da barra lateral */
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: #f5f3f3; /* Cor azul escuro da barra lateral */
+    border-radius: 4px; /* Arredondamento da barra */
+}
+
+/* Efeito ao passar o mouse sobre a barra de rolagem da barra lateral */
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background-color: #e62780; /* Cor ainda mais escura ao passar o mouse */
+}
+
+  body {
+    background: linear-gradient(142deg, #0d0d0d, #fffbfb); /* Fundo dinâmico com gradiente */
+    color: #dbdbdb; /* Cor do texto clara */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Remove rolagem horizontal */
+    overflow-y: auto; /* Permite rolagem vertical se o conteúdo exceder */
+}
+
+/* Estilo da barra de navegação */
+.navbar {
+    background-color: #cd1bdd; /* Azul para a barra de navegação */
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white; /* Cor do texto da barra de navegação */
+    font-size: 18px;
+}
+
+/* Estilo dos links na barra de navegação */
+.navbar a {
+    color: rgb(8, 1, 1);
+    text-decoration: none;
+    margin: 0 10px;
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    color: #cce7ff; /* Efeito de hover mais claro */
+}
+
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+nav {
+    background-color: #1a1a1a;
+    width: 280px;
+    height: calc(100% - 50px);
+    position: fixed;
+    left: -280px;
+    top: 90px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    border-radius: 15px;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+input[type="checkbox"]:checked ~ nav {
+    transform: translateX(280px);
+}
+
+label {
+    padding: 15px;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    cursor: pointer;
+    z-index: 1001;
+ 
+   
+    color: white;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+   
+}
+
+label:hover {
+   
+    transform: scale(1.1);
+}
+
+.tooltip {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    transform: translateX(-50%);
+}
+
+label:hover .tooltip {
+    opacity: 1;
+}
+
+nav ul {
+    list-style: none;
+    padding: 20px;
+    margin: 0;
+    position: absolute;
+    top: 5px;
+    width: 80%;
+}
+
+nav li {
+    border-bottom: 1px solid #444;
+}
+
+nav a {
+    display: block;
+    padding: 15px;
+    color: #eee;
+    font-size: 18px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 10px;
+   
+   
+}
+
+nav a:hover {
+    background-color: #ff4d4d;
+    color: #fff;
+}
+
+.logo {
+    width: 150px;
+    margin: 20px;
+}
+
+.content {
+    margin-left: 30px;
+    padding: 20px;
+}
+
+.image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.image-gallery img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.post {
+    background-color: #020101a2;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgb(180, 156, 156);
+}
+
+.post h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+.post p {
+    color: #666;
+}
+
+.futuristic-button {
+    background-color: #ff4d4d;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.futuristic-button:hover {
+    background-color: #e03c3c;
+    transform: scale(1.05);
+}
+
+.futuristic-section {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    margin-top: 20px;
+}
+
+/* Container dos ícones */
+.social-icons {
+    display: flex;
+    justify-content: center; /* Centraliza os ícones */
+    gap: 15px; /* Espaçamento entre os ícones */
+    margin-top: 20px; /* Espaçamento superior */
+}
+
+/* Estilo para os ícones */
+.social-icon {
+    color: #000000; /* Cor azul padrão para os ícones */
+    font-size: 24px; /* Tamanho dos ícones */
+    text-decoration: none;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Efeito hover para os ícones */
+.social-icon:hover {
+    color: #eb0f2d; /* Cor azul mais escuro ao passar o mouse */
+    transform: scale(1.2); /* Aumenta o ícone levemente */
+}
+
+/* Personalização para cada ícone (opcional) */
+.social-icon i {
+    padding: 10px;
+    
+    
+}
+
+
+/* Media Queries */
+@media (max-width: 1024px) {
+    .content {
+        margin-left: 30px;
+    }
+    nav {
+        width: 250px;
+    }
+    label {
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 768px) {
+    nav {
+        width: 200px;
+    }
+    .content {
+        margin-left: 20px;
+    }
+    label {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    nav {
+        width: 150px;
+        top: 80px;
+    }
+    .content {
+        margin-left: 50px;
+        padding: 10px;
+    }
+    label {
+        font-size: 20px;
+    }
+    .image-gallery img {
+        max-width: 100%;
+    }
+}
+
+  </style>
+</head>
+<body>
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle">
+        ☰
+        <div class="tooltip">Menu</div>
+    </label>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index1.html">Novidades</a></li>
+            <li><a href="index3.html">Tutoriais</a></li>
+            <li><a href="index2.html">Sobre</a></li>
+            <li><a href="index4.html">Reportagens</a></li>
+            <li><a href="index5.html">Galeria</a></li>
+        </ul>
+    </nav>
+    <div class="content">
+        <img src="JOHN.jpg" alt="Logo da Empresa" class="logo">
+        <h1>Bem-vindo ao Insight360</h1>
+        <p>Explore nossas seções para saber mais sobre nós e acompanhar as últimas reportagens.</p>
+        
+        <!-- Futuristas e seções adicionais -->
+        <div class="futuristic-section">
+            <h2>Seção Futurista</h2>
+            <p>Explore nossos recursos futuristas, incluindo relatórios e análises avançadas.</p>
+            <button class="futuristic-button">Saiba Mais</button>
+        </div>
+        
+        <!-- Espaço para imagens -->
+        <div class="image-gallery">
+            <img src="image1.jpg" alt="Imagem 1">
+            <img src="image2.jpg" alt="Imagem 2">
+            <img src="image3.jpg" alt="Imagem 3">
+        </div>
+        
+        <!-- Exemplos de posts para futuras reportagens -->
+        <div class="post">
+            <h2>Título do Post 1</h2>
+            <p>Exemplo de conteúdo para futuras reportagens. Adicione aqui suas notícias e atualizações.</p>
+        </div>
+        <div class="post">
+            <h2>Título do Post 2</h2>
+            <p>Outro exemplo de post. Utilize esta área para compartilhar informações relevantes e interessantes.</p>
+        </div>
+
+        <!-- Redes Sociais -->
+        <div class="social-icons">
+            <a href="https://facebook.com" target="_blank" class="social-icon">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank" class="social-icon">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" class="social-icon">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" class="social-icon">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" class="social-icon">
+                <i class="fab fa-youtube"></i>
+            </a>
+        </div>
+        
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>
